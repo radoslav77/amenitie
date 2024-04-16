@@ -44,11 +44,11 @@ class Amenity(models.Model):
     name = models.CharField(max_length=300)   
     date_of_arrival = models.CharField(max_length=100)
     date_of_departure = models.CharField(max_length=100)
-<<<<<<< HEAD
+
     
-=======
+
     num_of_fruit = models.CharField(max_length=200, default=1, blank=True, null=True)
->>>>>>> b1e5466a50b1b807b98c8465fd006b3f60d9f7f8
+
     day_of_week = models.CharField(max_length=200)
     item_code = models.CharField(
         max_length=200, blank=True, null=True)
