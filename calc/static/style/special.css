@@ -1,0 +1,51 @@
+
+
+#form-container{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    height: 50%;
+    margin-left: 15%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+form{
+    width: 80%;
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+input{
+    float: right;
+    width: 70%;
+    margin-right: 10%;
+}
+select{
+    float: right;
+    width: 70%;
+    margin-right: 10%;
+}
+#id_arrival_date{
+    width: 70%;
+}
+.LinkToDay{
+    height: 6rem;
+    position: relative;
+    margin-left: 30%;
+    font-size: 2.5em;
+}
+body{
+    background-color: rgb(207, 203, 190);
+    
+    background-image: linear-gradient(rgba(0, 0, 255, 0.5), rgba(255, 255, 0, 0.5)),
+              url(https://lh4.googleusercontent.com/wJh4s3sEO5HBwxmRMr1rZImrV3jQHFbC2OYceV0pcRWGwzO2tfR7jzRisn-Tpqx3w0gJWcfdpW_RgE00oSBdVaS8J23LxfqOJ49ZP2u9Ni7qJcHH8x26_YaYqSs8TNBz3h1eUYEE), url(https://ucarecdn.com/dbfbdb78-2419-4a51-9d20-f3ee4651fc64/-/resize/800x/);
+
+    /*
+    background-image: url(https://lh4.googleusercontent.com/wJh4s3sEO5HBwxmRMr1rZImrV3jQHFbC2OYceV0pcRWGwzO2tfR7jzRisn-Tpqx3w0gJWcfdpW_RgE00oSBdVaS8J23LxfqOJ49ZP2u9Ni7qJcHH8x26_YaYqSs8TNBz3h1eUYEE), url(https://ucarecdn.com/dbfbdb78-2419-4a51-9d20-f3ee4651fc64/-/resize/800x/);
+    background-position: right bottom, 25% 75%;
+    background-repeat: no-repeat, no-repeat;
+    background: (to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73));*/
+   
+   
+}

@@ -1,0 +1,27 @@
+{% extends "calc/base.html" %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="/static/style/special.css">
+{% endblock %}
+
+
+{% block body %}
+
+<div class="LinkToDay">
+    <a href="{% url 'calc:update_daily' %}">Return to Daily</a>
+</div>
+
+<div id="form-container" class="form-container">
+        <form method="post" action="{% url 'calc:special' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+            
+        </form>
+</div>
+
+{% endblock%}
+{% block static %}
+<script src="{% static 'js/special.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'calc/base.html' %}
+
+
+{% block style %}
+<style>
+	.container{
+		margin-left: 1%;
+	}
+	.card{
+		margin-top: -20%;
+		width: 50%;
+		background-color: inherit;
+		box-shadow: 3px 3px rgb(75, 62, 62), -1em 0 .4em olive;
+		margin-left: 45%;
+	}
+	@media only screen and (max-width: 600px){
+		.card{
+			width: 60%;
+			background-color: inherit;
+			box-shadow: 3px 3px rgb(75, 62, 62), -1em 0 .4em olive;
+			margin-left: 20%;
+			margin-top: 40%;
+	}
+		
+	}
+</style>
+
+{% endblock %}
+{% block body %}
+
+<div class="container">
+	<div class="card">
+		<div class="card-body">
+		<h3 class=" text-center">Login to Your Account!</h3>
+		<form action="" method="POST">
+			{% csrf_token %}
+			<label>Username</label>
+			<input type="text" placeholder="Enter Your Username" class="form-control" name="username">
+			<label>Password</label>
+			<input type="password" placeholder="Enter Your Password" class="form-control" name="password">
+			<br>
+			{% if error %}
+			<i style="color:red;">{{ error }}</i>
+			{% endif %}
+		<input  type="submit" value="Login" class="btn btn-danger">
+		</form>
+		
+		</div>
+	</div >
+</div>
+
+
+{% endblock %}

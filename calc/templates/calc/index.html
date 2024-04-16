@@ -1,0 +1,79 @@
+{% extends "calc/base.html" %}
+{% load static %}
+{% load auth_extras %}
+
+{% block style %}
+<link rel="stylesheet" href="/static/style/index.css">
+<style>
+body{
+    background-image: url(https://lh4.googleusercontent.com/wJh4s3sEO5HBwxmRMr1rZImrV3jQHFbC2OYceV0pcRWGwzO2tfR7jzRisn-Tpqx3w0gJWcfdpW_RgE00oSBdVaS8J23LxfqOJ49ZP2u9Ni7qJcHH8x26_YaYqSs8TNBz3h1eUYEE), url(https://ucarecdn.com/dbfbdb78-2419-4a51-9d20-f3ee4651fc64/-/resize/800x/);
+        background-position: right bottom, left top;
+        background-repeat: no-repeat, no-repeat;
+    }
+    .holder{
+        background-color: transparent;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+
+{% if not request.user.is_authenticated %}
+    <div id="msg"><h1>{{msg}}</h1></div>
+{% else %}
+    
+    <div id="greeting"><h1>Hello:  {{user}}</h1></div>
+<div class="spacial" id="spec">
+    <a href="{% url 'calc:special' %}">Input Special Amenity</a>
+    <a href="{% url 'calc:update' %}"><h6>Update Amenitie List</h6></a><br>
+</div>
+<div class="todayAm">
+    <button class="btnLink"> <a href="{% url 'calc:update_daily' %}"><h6>Today Amenitie</h6></a></button>
+    <button class="btnLink"><a href="{% url 'calc:tomorrow_amenities' %}"><h6>Tomorrow Amenitie</h6></a></button>
+    <button class="btnLink"><a href="{% url 'calc:day_after' %}"><h6>Day After Amenitie</h6></a></button>
+</div>
+
+<div class="holder">
+    <div class="form-container" >
+        <form id="upload" method="post" action="{% url 'calc:upload_csv' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form1.as_p }}
+            <button type="submit">Upload CSV</button>
+           
+        </form>
+
+    </div>
+    <div class="form-container" >
+        <h3>Replanisment</h3>
+        <div class="form">
+            <form action="{% url 'calc:index' %}" method="post" enctype="multipart/form-data" id="form">
+                {% csrf_token %}
+                <!--<input type="date" name="day" id="weekDay">-->
+                <input type="number" name="amount" id="amound" min="0" max="100">
+                <input type="submit" value="Submit" id="btn">
+            </form>
+        </div>
+    </div>
+</div>
+
+<output id="output"></output>
+<div class="archive" id="archive">
+    <li><a href="{% url 'calc:month' 'January' %}">January</a></li>
+    <li><a href="{% url 'calc:month'  'February' %}">February</a></li>
+    <li><a href="{% url 'calc:month' 'March' %}">March</a></li>
+    <li><a href="{% url 'calc:month' 'April' %}">April</a></li>
+    <li><a href="{% url 'calc:month' 'May' %}">May</a></li>
+    <li><a href="{% url 'calc:month' 'June' %}">June</a></li>
+    <li><a href="{% url 'calc:month' 'July' %}">July</a></li>
+    <li><a href="{% url 'calc:month' 'August' %}">August</a></li>
+    <li><a href="{% url 'calc:month' 'September' %}">September</a></li>
+    <li><a href="{% url 'calc:month'  'Octomber' %}">Octomber</a></li>
+    <li><a href="{% url 'calc:month'  'November' %}">November</a></li>
+    <li><a href="{% url 'calc:month' 'December' %}">December</a></li>
+</div>
+{% endif %}
+
+{% endblock %}
+{% block static %}
+<script src="{% static 'js/index.js' %}"></script>
+{% endblock %}

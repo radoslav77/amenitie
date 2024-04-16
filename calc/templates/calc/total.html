@@ -1,0 +1,117 @@
+{% extends "calc/base.html" %}
+{% load static %}
+
+
+{% block style %}
+<link rel="stylesheet" href="/static/style/total.css">
+<link rel="stylesheet" href="/static/style/today.css">
+
+<style>
+  .body-container{
+margin-top: -10%;
+  }
+  .month{
+    margin-left: 10%;
+    justify-content: center;
+  }
+  #title{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    color: #fff;
+    
+  }
+  #month{
+    text-align: center;
+    margin-bottom: 4%;
+    font-weight: bold;
+    font-size: 26px;
+  }
+  #totalAmound{
+    color: #a648e6;
+    text-decoration:underline overline #797099;
+   
+  }
+</style>
+{% endblock %}
+
+{% block body %}
+
+
+<div class="month" >
+  <h2 id="title">For Month of: <p id="month">{{month}}</p></h2>
+  <h3 id="totalAmound"></h3>
+</div>
+
+
+<div class="item-container">
+
+<table id="Tally">
+
+</table>
+
+</div>
+
+<div class="item-container">
+<table >
+    <tr>
+      <th>Item Name</th>
+      <th>Total for the Month</th>
+      <th>Coast</th>
+      <th>Total cost</th>
+      <th>Amenities</th>
+      <th>Date</th>
+    </tr>
+   
+    <tr >
+      <td><p>{{d.name}}</p></td>
+      <td >{{d.membership}}</td>
+      <td>{{d.vip_level}}</td>
+      <td>{{d.date}}</td>
+      <td class="amenities">{{d.fruit_amenity}}, {{ d.drink_amenity}}, {{d.dessert_amenity}}</td>
+      <td>{{d.arrival_date}}</td>
+    </tr>
+  
+    <tr>
+        {% if uptodate %}
+        {% for data in uptodate %}
+        <tr>
+          <td><p>{{data.name}}</p></td>
+          <td >{{data.membership}}</td>
+          <td>{{data.vip_level}}</td>
+          <td>{{data.date}}</td>
+          <td class="amenities">{{data.fruit_amenity}}, {{ data.drink_amenity}}, {{d.dessert_amenity}}</td>
+          <td>{{data.arrival_date}}</td>
+         
+        </tr>
+        {% endfor %}
+        {% endif %}
+
+    
+    {% for d in dataRepl %}
+    <tr >
+      
+      <td > {{d.name}} </td>
+      <td>{{d.number}}</td>
+      <td>£ {{d.cost}}</td>
+      <td class='totals'>£ {{d.price}}</td>
+      <td></td>
+      <td></td>
+      
+    </tr>{% endfor %}
+  </table>
+
+  </div>
+
+  <div class="total">
+    <ul id="total">
+        <li></li>
+    </ul>
+</div>
+
+
+{% endblock %}
+{% block static %}
+<script src="{% static 'js/total1.js' %}"></script>
+{% endblock %}

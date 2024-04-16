@@ -1,0 +1,69 @@
+{% extends "calc/base.html" %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="/static/style/arch-month.css">
+
+{% endblock %}
+
+
+{% block body %}
+
+<div class="page">
+<h1>For the Month of: {{month}}</h1>
+<div class="item-container">
+  <h2 class="goTotals"><a class="goTotals" href="{% url 'calc:total' month %}">Go to totals</a></h2>
+<table style="width:80%" id="table">
+    <tr>
+      <th>Name</th>
+      <th>Membership</th>
+      <th>Reserved</th>
+      <th>Date of Arrival</th>
+      <th>Amenities</th>
+      <th>Date</th>
+    </tr>
+    {% for d in data %}
+        {% if d.reserved != '0' %}
+            <tr id="lines">
+                <td><p>{{d.today_date}}</p></td>
+                <td >{{d.amenity_code}}</td>
+                <td class="reserved">{{d.reserved}}</td>
+                <td>{{d.arrival_date}}</td>  
+                <td class="amenities">{{d.fruit_amenity}},<br>{{ d.dessert_amenity}},<br>{{d.dessert_amenity1}}</td>  
+                <td>{{d.input_date}}</td>
+                {% if user.is_superuser %}
+                <td><a href="{% url 'calc:delete_entry' d.id %}">Delete</a></td>
+                {% endif %}
+            </tr>
+        {% endif %}
+    {% endfor %}
+    <tr>
+      <td>February</td>
+      <td style="text-align:right">$80</td>
+    </tr>
+  </table>
+  <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+  <h2 class="goTotals"><a class="goTotals" href="{% url 'calc:total' month %}">Go to totals</a></h2>
+
+</div>
+</div>
+{% endblock %}
+{% block static %}
+<script src="{% static 'js/arch-month.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "calc/base.html" %}
+{% load static %}
+
+{% block style %}
+{% endblock%}
+
+{% block body %}
+<a href="{% url 'calc:update_daily' %}">Return to Daily</a>
+<form method="post" action="{% url 'calc:upload_csv' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Upload CSV</button>
+    <button type="submit">Update CSV</button>
+</form>
+
+{% endblock%}

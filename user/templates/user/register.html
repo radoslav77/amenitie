@@ -1,0 +1,90 @@
+{% extends 'calc/base.html' %}
+
+
+{% block style %}
+<style>
+	.container{
+		margin-top: -20%;
+		margin-left: 1%;
+		
+	}
+	.card{
+		margin-top: -20%;
+		
+		background-color: inherit;
+		box-shadow: 3px 3px rgb(75, 62, 62), -1em 0 .4em olive;
+		margin-left: 45%;
+	}
+	label{
+		font-size: bold;
+		float: left;
+		margin: 1rem;
+	}
+	.helptext{
+		font-size: 12px;
+		color: rgb(192, 50, 50);
+		
+	}
+	input{
+		margin: 1rem;
+	}
+	#id_password1{
+		margin-left: 37%;
+	}
+	#id_email{
+		margin-left: 10%;
+	}
+	#id_last_name{
+		margin-left: 14%;
+	}
+	#id_first_name{
+		margin-left: 14%;
+	}
+	#id_username{
+		margin-left: 14%;
+	}
+	@media only screen and (max-width: 600px){
+		.card{
+			width: 60%;
+			background-color: inherit;
+			box-shadow: 3px 3px rgb(75, 62, 62), -1em 0 .4em olive;
+			margin-left: 20%;
+			margin-top: 40%;
+	}
+	#id_password1{
+		margin-left: 10%;
+	}
+	label{
+		font-size: bold;
+		float: left;
+		margin: 10px;
+	}
+	.helptext{
+		font-size: 12px;
+		margin: 20%;
+		color: rgb(192, 50, 50);
+		
+	}
+	}
+	
+
+</style>
+
+{% endblock %}
+
+{% block body %}
+
+ <div class="container">
+	<div class="card">
+		<div class="card-body">
+			<h3 class="text-center" >Register Account!</h3>
+			<form action="" method="POST">
+			{% csrf_token %}
+			{{ form.as_div}}
+			<input type="submit" value="Register" class="btn btn-danger">
+			</form>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

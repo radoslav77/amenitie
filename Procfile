@@ -1,0 +1,1 @@
+web: gunicorn amenitiesapp.wsgi --log-file -

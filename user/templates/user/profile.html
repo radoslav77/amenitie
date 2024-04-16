@@ -1,0 +1,22 @@
+{% extends 'calc/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block body %}
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col md-3">
+                <img class="img fluid" src="{{ profile.user }}" alt="{{ profile.user}}">
+                <h3 class="text-center">{{ user.first_name }} <br> {{ user.last_name}}</h3>
+                
+                </div>            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

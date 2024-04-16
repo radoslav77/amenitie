@@ -1,0 +1,89 @@
+{% extends "calc/base.html" %}
+{% load static %}
+
+{% block static %}
+<script src="{% static 'js/today.js' %}"></script> 
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="/static/style/today.css">
+{% endblock %}
+
+{% block body %}
+{% if user.is_superuser%}
+{% for m in media %}
+<ul id="files">
+    <a href="{% url 'calc:delete_media' m.id %}">
+        <li>{{m.file}}-----{{m.id}}</li>
+    </a>
+</ul>
+
+{% endfor %}
+{% endif %}
+    
+    <h1>Todays arrivals: <p id="today_date">{{today}}</p></h1>
+
+    <div class="item-container">
+       
+<table style="width:80%">
+  <tr>
+    <th>Name</th>
+    <th>Membership</th>
+    <th>Reserved</th>
+    <th>Date of Arrival</th>
+    <th>Amenities</th>
+    <th>Date</th>
+  </tr>
+  {% for d in data %}
+  <tr class="ame">
+    {% if d.reserved != '0' %}
+        <td><p>{{d.today_date}}</p></td>
+        <td >{{d.amenity_code}}</td>
+        <td>{{d.reserved}}</td>
+        <td>{{d.arrival_date}}</td>  
+        <td class="amenities">{{d.fruit_amenity}},<br>{{ d.dessert_amenity}},<br>{{d.dessert_amenity1}}</td>  
+        <td>{{d.input_date}}</td>
+    {% endif %}
+  </tr>
+  {% endfor %}
+  {% if special  %}
+   
+  {% for s in special %}
+  <tr>
+    
+    <td><p>{{s.arrival_date}}</p></td>
+    <td >{{s.amenity_code}}</td>
+    <td>{{s.amenity_amount}}</td>
+    <td>{{s.arrival_date}}</td>  
+    <td class="amenities">{{s.amenity_type}},<br>{{ d.dessert_amenity}},<br>{{d.dessert_amenity1}}</td>  
+    <td>{{s.date_of_input}}</td>
+  </tr>
+  {% endfor %}
+  {% endif %}
+  <tr>
+    <td>February</td>
+    <td style="text-align:right">$80</td>
+  </tr>
+</table>
+{% if replenish %}
+{% for en in replenish %}
+   <h5>Replenishment for today:</h5> <p>{{en.amenity_replen}} : {{en.amount_day}}</p>
+{% endfor %}
+{% endif %}
+
+</div>
+<div class="total">
+    <ul id="total">
+        <li></li>
+    </ul>
+</div>
+
+<div class="longstay">
+    <div class="card_longsaty">
+        <button class="BtnLink"><a href="{% url 'calc:tomorrow_amenities' %}">Tomorrow Amenity</a></button>
+        <button class="BtnLink"><a href="{% url 'calc:day_after' %}">Day after Tomorrow</a></button>
+        
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,133 @@
+
+    body{
+        background-color: #0d1117;
+       
+    }
+    .item-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid #d3d3d3;
+        width: 90%;
+        margin-left: 3%;
+       
+        padding: 10px;
+    }
+    .item-container table{
+        width: 95%;
+    }
+    @media only screen and (max-width: 800px){
+        .item-container{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 80%;
+                width: 100%;
+                margin-left: 3%;
+            
+                padding: 10px;
+            }
+    .item-container table{
+                width: 60%;
+               
+            }
+    table, th, td{
+        font-size: small;
+       
+    }
+    p{
+        color: #fff;
+        margin: 5px;
+        font-size: smaller;
+    }
+    }
+
+    .item{
+        display: flex;
+        flex-direction: row;
+       
+        margin: 5px;
+    }
+    label{
+        margin: 0;
+        text-decoration: underline;
+    }
+    .ROW{
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    table, th, td {
+    border: 1px solid rgb(125, 170, 196);
+    }
+    td{
+        color: #fff;
+        text-align: center;
+    }
+    p{
+        color: #fff;
+        margin: 5px;
+    }
+    th{
+        color: rgb(125,170,196);
+    }
+    h1{
+        margin-left: 15%;
+        color: #60b1b4;
+    }
+    h5{
+        color: #60b1b4;
+    }
+    #total_taly{
+        margin-left: 10%;
+        
+
+    }
+    #taly {
+        text-align: center;
+        column-count: 3;
+        column-gap: 40px;
+    }
+    #total_taly p {
+       font-weight: bolder;
+    }
+    .card_longsaty{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        text-align: center;
+    }
+    .card_longsaty a {
+        margin: 2%;
+    }
+    .BtnLink{
+        width: 20%;
+        margin-left: 3px;
+        text-align: center;
+        margin-bottom: 2px;
+        border-radius: 50% 20% / 10% 40%;
+        border: 1px solid #000;
+        background-color: rgb(121, 139, 139);
+        
+    }
+    .BtnLink a{
+        color: #fff;
+        text-decoration: none;
+    }
+    .BtnLink:hover{
+        background-color: rgb(91, 95, 95);
+    }
+    #files{
+        width: 20%;
+        border: 1px solid red;
+        text-align: center;
+        margin-left: 10%;
+        height: inherit;
+        border-radius: 25% 10% ;
+    }
+    #files li{
+        list-style-type: none;
+    }
+    #files li:hover{
+        background-color: red;
+        color: #fff;
+    }

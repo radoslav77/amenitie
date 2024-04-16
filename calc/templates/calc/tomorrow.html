@@ -1,0 +1,84 @@
+{% extends "calc/base.html" %}
+{% load static %}
+
+
+{% block static %}
+<script src="{% static 'js/tomorrow.js' %}"></script>
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="/static/style/tomorrow.css">
+<link rel="stylesheet" href="/static/style/today.css">
+{% endblock %}
+
+
+
+{% block body %}
+{% if not request.user.is_authenticated %}
+    <div id="msg"><h1>{{msg}}</h1></div>
+{% else %}
+            {% if date1 %}
+                <h1 id="words">{{date1}} <h1 id="date">{{date}}</h1></h1>
+            {% else %}   
+                <h1 id="words">Tomorrow arrivals: <h1 id="date">{{date}}</h1></h1>
+            {% endif %}
+        <div class="item-container">
+        
+    <table >
+    <tr>
+        <th>Name</th>
+        <th>Membership</th>
+        <th>Reserved</th>
+        <th>Date of Arrival</th>
+        <th>Amenities</th>
+        <th>Date</th>
+    </tr>
+    {% for d in data %}
+    <tr>
+        {% if d.reserved != '0' %}
+            <td>{{d.arrival_date}}</td>
+            <td >{{d.amenity_code}}</td>
+            <td>{{d.reserved}}</td>
+            <td>{{d.arrival_date}}</td>  
+            <td class="amenities">{{d.fruit_amenity}},<br>{{ d.dessert_amenity}},<br>{{d.dessert_amenity1}}</td>  
+            <td>{{d.input_date}}</td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+    {% if special %}
+    {% for s in special %}
+    <tr>
+        {% if d.reserved != '0' %}
+            <td>{{s.arrival_date}}</td>
+            <td >{{s.amenity_code}}</td>
+            <td>{{s.reserved}}</td>
+            <td>{{s.arrival_date}}</td>  
+            <td class="amenities">{{s.amenity_type}}</td>  
+            <td>{{s.input_date}}</td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+    {% endif %}
+    <tr>
+        <td>February</td>
+        <td style="text-align:right">$80</td>
+    </tr>
+    </table>
+
+
+    </div>
+    <div class="total">
+        <ul id="total">
+            <li></li>
+        </ul>
+    </div>
+
+    <div class="longstay">
+        <div class="card_longsaty">
+            <button class="BtnLink" id="btnLinkReverse"><a href="{% url 'calc:tomorrow_amenities' %}" class="BtnLinkElement">Tomorrow Amenity</a></button>
+            <button class="BtnLink" ><a href="{% url 'calc:update_daily' %}" class="BtnLinkElement">Today amenities</a></button>
+            <button class="BtnLink"><a href="{% url 'calc:day_after' %}" class="BtnLinkElement">Day after Tomorrow</a></button>
+        </div>
+    </div>
+{% endif %}
+{% endblock %}
