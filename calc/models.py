@@ -44,11 +44,6 @@ class Amenity(models.Model):
     name = models.CharField(max_length=300)   
     date_of_arrival = models.CharField(max_length=100)
     date_of_departure = models.CharField(max_length=100)
-
-    
-
-    num_of_fruit = models.CharField(max_length=200, default=1, blank=True, null=True)
-
     day_of_week = models.CharField(max_length=200)
     item_code = models.CharField(
         max_length=200, blank=True, null=True)

@@ -133,15 +133,42 @@ def upload_csv(request):
                 with open ('media/'f'{entyr.file}', 'r') as fi:
                     csvreader = csv.reader(fi)
             '''
+            # THIS whole function need to be relook at as the clened date deleties all of the data 
+            #where the cleared_row is the append only returns two entry and nothing else
+            #i need to find another way to save the data to the database
             
             #New_data = []
+            cleaned_rows = []
+            for row in csv_reader:
+                #print(row)
+                cleaned_row = [cell.strip() for cell in row if cell.strip()]  # Remove empty strings and strip whitespace
+               # print(cleaned_row)
+                cleaned_rows.append(cleaned_row)
+            #print(cleaned_row)
+            for row in cleaned_rows:
+                    #if len(row) >= 8:
+                      # print(row[0],row[3],row[4],row[6],row[8])# after the loops is finish shows the list out of range!!!!!!!!!!
 
-            for cell in csv_reader:
+                    if len(row) >= 9:  # Ensure the row has enough columns to access the desired indices
+                        #print(row[0],row[3],row[4],row[6],row[8])
+                        amenity = Amenity(
+                        item_code=row[0],
+                        date_of_arrival=row[3],
+                        name=row[4],
+                        amount=row[6],
+                        date_of_departure=row[8]
+                            )
+                        #print(amenity)
+                        amenity.save()
+                        '''
                             #print(row[0], row[1])
                             #print(cell[1], cell[2], cell[3], cell[5], cell[6], cell[8],cell[11],cell[12],cell[18])
                             first_data = Amenity(name=cell[6],date_of_arrival=cell[5],date_of_departure=cell[18],item_code=cell[2],amount=cell[8])
-                            first_data.save()
-                            '''
+                            for inp in first_data:
+                                print(inp)
+                                first_data.save()
+                            
+                            
                             New_data.append({
                                 'date_arr':cell[5],
                                 'amenity_code': cell[2],
@@ -164,17 +191,34 @@ def upload_csv(request):
                             '''
 
                             #print(first_data)
-            duplicate_names = Amenity.objects.values('name').annotate(name_count=Count('name')).filter(name_count__gt=1)
-            #print(Amenity.objects.all())
-            for entry in duplicate_names:
-                name =entry['name']
-                duplicate_entries = Amenity.objects.filter(name=name)
-                duplicate_entries.exclude(pk=duplicate_entries.first().pk).delete()
             for i in Amenity.objects.all():
                 if '/' not in i.date_of_arrival:
                     i.delete()
 
-            for e in Amenity.objects.all():
+            result_dublicate = Amenity.objects.all()
+            unique_results = []
+            seen = set()
+            for res in result_dublicate:
+                if res not in seen :
+                    unique_results.append(res)
+                    seen.add(res)
+            
+
+            duplicate_names = Amenity.objects.values('name').annotate(name_count=Count('name')).filter(name_count__gt=1)
+            
+            for entry in duplicate_names:
+                name =entry['name']
+                
+                duplicate_entries = Amenity.objects.filter(name=name)
+                
+                duplicate_entries.exclude(pk=duplicate_entries.first().pk).delete()
+                #print(duplicate_entries)
+                #print(duplicate_entries)
+                #for j in Amenity.objects.all():
+                    #if i.name == j.name:
+                        #print(name, id(j))
+            for e in seen:
+                       #print(e)
                         day = datetime.strptime(e.date_of_arrival, '%d/%m/%Y')
                         day_name= day.strftime('%a')
                         #print(day_name)
@@ -209,6 +253,8 @@ def update_daily(request):
 
     DATE_OF_SUBMITION = Amenities_CSV.objects.filter(date_of_input=TODAY)
     entry = Amenities_CSV.objects.all()
+    entry_new_database = Amenity.objects.all()
+    print(entry_new_database)
     replenish = Replenishment.objects.filter(date_of_input=TODAY)
     special_data =[]
     reple = []
@@ -230,10 +276,11 @@ def update_daily(request):
     Data_for_today =[]
     Count = 0
     data_with_amenity = []
-	
+    print(entry)
     for ent in entry:
-       # print(ent.date,' --', today)
+        #print(ent.date_of_arrival,' --', today)
         if ent.date == today:
+            
             for key, item in CODE_AMENITY.items():
                 if ent.amenity_code == key:
                     Count = Count + 1
